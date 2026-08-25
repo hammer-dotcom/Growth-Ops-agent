@@ -1,10 +1,11 @@
-<!-- SETUP_INCOMPLETE -->
-company_name: {{REPLACE_ME}}
-domain: {{REPLACE_ME}}
-cms: {{REPLACE_ME}}
-business_model: {{REPLACE_ME}}
-target_market: {{REPLACE_ME}}
+company_name: Trackly
+domain: trackly.io
+cms: WordPress
+business_model: B2B SaaS
+target_market: Engineering and operations teams at Series A-C SaaS startups, primarily US and UK
 competitors:
-  - {{REPLACE_ME}}
-  - {{REPLACE_ME}}
-  - {{REPLACE_ME}}
+  - asana.com
+  - linear.app
+  - clickup.com
+  - monday.com
+  - notion.so

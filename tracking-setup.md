@@ -1,3 +1,2 @@
-<!-- SETUP_INCOMPLETE -->
-tracking_tool: {{REPLACE_ME}}
-workspace_url: {{REPLACE_ME}}
+tracking_tool: local-files-only
+workspace_url: n/a

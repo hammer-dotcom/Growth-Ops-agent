@@ -13,13 +13,14 @@ prioritize, optimize, validate, and report on SEO performance using real data.
 - Optimizes existing content based on performance data
 - Validates quality, facts, and tone before publishing
 - Generates recurring performance reports (n8n-ready for scheduling)
+- Tracks competitor ad creative weekly (Meta + LinkedIn Ad Libraries, angle mix, durable ads, new creative)
 - Prioritizes everything into a structured execution backlog
 
 ## Architecture
 
 ```
-agents/          -> 9 specialized agents, each owns one responsibility
-skills/          -> 11 focused skills, agents decide when to use which
+agents/          -> 10 specialized agents, each owns one responsibility
+skills/          -> 12 focused skills, agents decide when to use which
 company-setup/   -> your company config, filled in by /setup
 workflows/       -> all outputs, organized by type (n8n-ready)
 commands/        -> slash commands (/setup)

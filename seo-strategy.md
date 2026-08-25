@@ -1,15 +1,19 @@
-<!-- SETUP_INCOMPLETE -->
 ## Priority topic clusters
-{{REPLACE_ME}}
+- Project management software
+- Sprint planning
+- Engineering team productivity
+- Issue tracking
+- Async team collaboration
+- OKR tracking
 
 ## Target audience
-{{REPLACE_ME}}
+Engineering managers, heads of operations, and CTOs at startups with 20-200 employees.
 
 ## Content goals
-{{REPLACE_ME}}
+Demo requests (primary), AEO citations in "best project management tool" and "vs" queries, category authority.
 
 ## Funnel focus
-{{REPLACE_ME}}
+Mid to bottom funnel: comparison and decision stage.
 
 ## Off-limits
-{{REPLACE_ME}}
+None.
