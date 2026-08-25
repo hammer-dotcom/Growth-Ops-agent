@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Ops Agents — Demo Output Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --black: #0D0D0D;
+    --white: #FAFAF8;
+    --mid: #1A1A1A;
+    --surface: #141414;
+    --border: #2A2A2A;
+    --accent: #4ADE80;
+    --accent-dim: rgba(74,222,128,0.12);
+    --muted: #6B6B6B;
+    --text: #E8E8E4;
+    --label-bg: #1E1E1E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 32px 48px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .header-brand {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header-title {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .header-title strong {
+    color: var(--accent);
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 56px 48px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .hero-headline {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 560px;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat {
+    padding: 28px 48px;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
+  }
+
+  .stat-value.accent { color: var(--accent); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* SECTION */
+  .section {
+    padding: 40px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* THE READ */
+  .read-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .read-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .read-bullet {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .read-text {
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .read-text strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  /* FINDINGS TABLE */
+  .findings {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .finding-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 140px;
+    gap: 0;
+    background: var(--surface);
+  }
+
+  .finding-row.header-row {
+    background: var(--label-bg);
+  }
+
+  .finding-cell {
+    padding: 14px 18px;
+    border-right: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .finding-cell:last-child { border-right: none; }
+
+  .finding-row.header-row .finding-cell {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 18px;
+  }
+
+  .competitor-name {
+    font-weight: 600;
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-right: 4px;
+  }
+
+  .tag-gap { background: rgba(239,68,68,0.15); color: #F87171; }
+  .tag-weak { background: rgba(251,191,36,0.12); color: #FCD34D; }
+  .tag-strong { background: rgba(74,222,128,0.12); color: var(--accent); }
+  .tag-open { background: rgba(139,92,246,0.15); color: #A78BFA; }
+
+  /* BRIEF CARD */
+  .brief-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .brief-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .brief-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .brief-meta {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .brief-intent {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .brief-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .brief-section {
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brief-section:nth-child(2n) { border-right: none; }
+  .brief-section:nth-last-child(-n+2) { border-bottom: none; }
+
+  .brief-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .brief-section ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .brief-section li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .brief-section li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* DRAFT PREVIEW */
+  .draft-preview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #9CA3AF;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .draft-preview::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(transparent, var(--surface));
+  }
+
+  .draft-h1 { color: var(--white); font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+  .draft-h2 { color: #D1D5DB; font-size: 13px; font-weight: 600; margin: 16px 0 8px; }
+  .draft-p { margin-bottom: 8px; }
+
+  /* ANGLE MIX */
+  .angle-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .angle-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 16px;
+    background: var(--label-bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .angle-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+
+  .angle-table tr:last-child td { border-bottom: none; }
+
+  .angle-table tr:hover td { background: var(--surface); }
+
+  .bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bar {
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  /* SOURCES */
+  .sources {
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  .sources-text {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .sources-text a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .sources-text a:hover { color: var(--accent); }
+
+  .sources-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 6px 14px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  /* PAGE BREAK LINE */
+  .page-break {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 48px;
+    margin: 0;
+  }
+
+  .page-break-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .page-break-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <div class="header-brand">Growth Ops Agents · Demo Output</div>
+  </div>
+  <div class="header-title">
+    <strong>3 agents · 1 pipeline run</strong>
+    TRACKLY (DEMO) · 25 AUG 2026<br>
+    competitor-analyst → content-strategist → content-writer
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">System output</div>
+  <h1 class="hero-headline">What the pipeline produced on a live run.</h1>
+  <p class="hero-sub">Three agents ran in sequence on a single query: competitor analysis → content brief → full draft. Every file was saved to <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)">/workflows/</code> automatically.</p>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat">
+    <div class="stat-value accent">3</div>
+    <div class="stat-label">Agents invoked</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">6</div>
+    <div class="stat-label">Competitors analyzed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value">1</div>
+    <div class="stat-label">Open gap found</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value accent">3</div>
+    <div class="stat-label">Output files saved</div>
+  </div>
+</div>
+
+<!-- THE READ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag">Agent 1</span>
+    <span class="section-title">competitor-analyst · The read</span>
+  </div>
+  <div class="read-items">
+    <div class="read-item">
+      <div class="read-bullet"></div>
+      <div class="read-text"><strong>Intent mismatch in the SERP.</strong> Half the top-6 results (Deltek, Celoxis) are AEC/construction engineering tools, not SaaS engineering-team PM tools. Naming this explicitly in the page copy is a differentiation angle no competitor is using.</div>
+    </div>
+    <div class="read-item">
+      <div class="read-bullet"></div>
+      <div class="read-text"><strong>Asana is the only real competitor defending this query.</strong> They have a purpose-built page at asana.com/teams/engineering with hero, social proof (1M+ teams, 54% faster execution), feature deep-dives, named logos (Figma, Spotify, Dell), templates, FAQ, and CTA. Every other competitor shows up only in listicles.</div>
+    </div>
+    <div class="read-item">
+      <div class="read-bullet"></div>
+      <div class="read-text"><strong>monday.com and Notion have zero presence.</strong> Neither is defending this query as an engineering-team tool. Safe to name directly in comparison content since they are not on this ground.</div>
+    </div>
+    <div class="read-item">
+      <div class="read-bullet"></div>
+      <div class="read-text"><strong>OKR tracking is an open gap.</strong> One of Trackly's five priority clusters is absent from every top-6 result. A dedicated section or landing page targeting this angle has no current competition in this SERP.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITOR TABLE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag">Agent 1</span>
+    <span class="section-title">Competitor SERP map · "project management software for engineering teams"</span>
+  </div>
+  <div class="findings">
+    <div class="finding-row header-row">
+      <div class="finding-cell">Competitor</div>
+      <div class="finding-cell">What they do / gap vs. Trackly</div>
+      <div class="finding-cell">Status</div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-cell"><span class="competitor-name">asana.com</span></div>
+      <div class="finding-cell">Purpose-built engineering page. Strong proof metrics and named enterprise logos. The page to beat.</div>
+      <div class="finding-cell"><span class="tag tag-strong">Defending</span></div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-cell"><span class="competitor-name">linear.app</span></div>
+      <div class="finding-cell">Shows up only in listicles. Narrowly framed as fast issue tracking. No page addressing broader eng-ops needs (OKRs, roadmapping).</div>
+      <div class="finding-cell"><span class="tag tag-weak">Partial</span></div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-cell"><span class="competitor-name">clickup.com</span></div>
+      <div class="finding-cell">Listicle presence only. No dedicated landing page for engineering teams.</div>
+      <div class="finding-cell"><span class="tag tag-weak">Weak</span></div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-cell"><span class="competitor-name">monday.com</span></div>
+      <div class="finding-cell">Zero presence in this SERP as an engineering-team tool. Safe to name directly in comparisons.</div>
+      <div class="finding-cell"><span class="tag tag-gap">Absent</span></div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-cell"><span class="competitor-name">notion.so</span></div>
+      <div class="finding-cell">Zero presence. Not defending this query at all.</div>
+      <div class="finding-cell"><span class="tag tag-gap">Absent</span></div>
+    </div>
+    <div class="finding-row">
+      <div class="finding-cell"><span class="competitor-name">OKR tracking</span></div>
+      <div class="finding-cell">Absent from every top-6 result. Trackly's priority cluster with zero current competition in this SERP.</div>
+      <div class="finding-cell"><span class="tag tag-open">Open gap</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT BRIEF -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag">Agent 2</span>
+    <span class="section-title">content-strategist · Content brief</span>
+  </div>
+  <div class="brief-card">
+    <div class="brief-header">
+      <div>
+        <div class="brief-title">Project Management Software for Engineering Teams</div>
+        <div class="brief-meta">trackly.io/engineering-teams · new page · bottom-funnel</div>
+      </div>
+      <div class="brief-intent">Mid → Decision intent</div>
+    </div>
+    <div class="brief-body">
+      <div class="brief-section">
+        <div class="brief-section-label">Recommended H2 structure</div>
+        <ul>
+          <li>Why engineering teams need different PM software</li>
+          <li>What to look for (cycle time, OKR tracking, async-first)</li>
+          <li>Trackly vs. Asana for engineering teams</li>
+          <li>Trackly vs. Linear for engineering teams</li>
+          <li>Trackly vs. ClickUp for engineering teams</li>
+          <li>Engineering-specific proof metrics</li>
+          <li>FAQ (6-8 questions)</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Differentiation angle</div>
+        <ul>
+          <li>Explicitly rule out AEC/construction use cases in H1</li>
+          <li>Lead with engineering-specific proof (cycle time, sprint completion rate) not generic productivity stats</li>
+          <li>Include comparison module targeting Asana, Linear, and ClickUp</li>
+          <li>Add OKR tracking section — unclaimed in current SERP</li>
+          <li>Seasonal urgency hook for Q1 planning window</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">Target audience</div>
+        <ul>
+          <li>Engineering managers at Series A-C SaaS startups</li>
+          <li>Heads of operations evaluating PM tooling</li>
+          <li>CTOs frustrated with Asana's enterprise bloat</li>
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-label">CTR recommendations</div>
+        <ul>
+          <li>"Project Management for Engineering Teams (Not Construction)"</li>
+          <li>"Built for SaaS Engineering Teams. Not AEC. Not Enterprise."</li>
+          <li>Meta: include cycle time and sprint metrics in snippet</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAFT PREVIEW -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag">Agent 3</span>
+    <span class="section-title">content-writer · Draft preview (excerpt)</span>
+  </div>
+  <div class="draft-preview">
+    <div class="draft-h1"># Project Management Software for Engineering Teams (Not Construction)</div>
+    <div class="draft-p">Search "project management software for engineering teams" and half the results are for AEC firms managing blueprints and site crews. If you run a SaaS engineering team shipping software weekly, that is not you. This page is for the other half.</div>
+    <div class="draft-h2">## What engineering teams actually need from a PM tool</div>
+    <div class="draft-p">A sprint is not a project phase. A cycle time metric is not a Gantt chart. Engineering teams need tooling that maps to how they actually work: async standups, issue cycles, OKR tracking, and sprint retrospectives — not waterfall timelines built for construction handoffs.</div>
+    <div class="draft-h2">## Trackly vs. Asana for engineering teams</div>
+    <div class="draft-p">Asana is the category's most established name. It has a purpose-built engineering page, 1M+ teams, and real enterprise logos. What it does not have is a tool designed from the ground up for engineering-team cadences...</div>
+    <div class="draft-h2">## OKR tracking built for engineering cycles</div>
+    <div class="draft-p">None of Trackly's five competitors address OKR tracking in this context. That is not an accident — most PM tools treat OKRs as a bolt-on. Trackly connects sprint outcomes directly to quarterly objectives...</div>
+  </div>
+</div>
+
+<!-- ANGLE MIX -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-tag">Summary</span>
+    <span class="section-title">What each agent produced · files saved to /workflows/</span>
+  </div>
+  <table class="angle-table">
+    <thead>
+      <tr>
+        <th>Agent</th>
+        <th>Output file</th>
+        <th>Key finding</th>
+        <th>Next step</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>competitor-analyst</strong></td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)">seo-briefs/project-management-...md</td>
+        <td>Intent mismatch gap + Asana is the only real competitor</td>
+        <td>Feed to content-strategist ✓</td>
+      </tr>
+      <tr>
+        <td><strong>content-strategist</strong></td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)">content-briefs/engineering-teams.md</td>
+        <td>H2 structure, comparison module, OKR angle, CTR options</td>
+        <td>Feed to content-writer ✓</td>
+      </tr>
+      <tr>
+        <td><strong>content-writer</strong></td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent)">drafts/engineering-teams.md</td>
+        <td>Full draft, AEO-structured, comparison sections, FAQ</td>
+        <td>content-evaluator or publish</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <div class="sources-text">
+    Sources: SERP analysis via web search · asana.com/teams/engineering · linear.app · clickup.com · monday.com · notion.so<br>
+    Run date: 25 Aug 2026 · Trackly is a fictional demo company used to demonstrate the pipeline · Classification by Claude claude-sonnet-4-6
+  </div>
+  <div class="sources-badge">growth-ops-agents</div>
+</div>
+
+</body>
+</html>
