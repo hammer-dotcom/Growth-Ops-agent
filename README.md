@@ -1,7 +1,6 @@
 # Growth Ops Agents
 
-An AI-powered SEO operations system built on Claude Code. Specialized agents analyze,
-prioritize, optimize, validate, and report on SEO performance using real data.
+An AI-powered SEO operations system built on Claude Code. Specialized agents analyze, prioritize, optimize, validate, and report on SEO performance using real data.
 
 ## What it does
 
@@ -35,35 +34,32 @@ CLAUDE.md is the constitution: rules every agent follows.
 /setup
 ```
 
-Interviews you about your site, tools, brand, and strategy. Fills in `company-setup/`
-and unlocks all agents. Nothing runs against placeholder data.
+Interviews you about your site, tools, brand, and strategy. Fills in `company-setup/` and unlocks all agents. Nothing runs against placeholder data.
 
 ## Quick start
 
 After setup:
-- "Run an SEO analysis on my site"
-- "Audit technical SEO for [url]"
-- "Analyze competitors for [keyword]"
-- "Create a content brief for [topic]"
-- "Generate a weekly SEO report"
+
+```
+"Run an SEO analysis on my site"
+"Audit technical SEO for [url]"
+"Analyze competitors for [keyword]"
+"Create a content brief for [topic]"
+"Generate a weekly SEO report"
+```
 
 ## Tools this system works with
 
 All optional. Everything works with free built-in web search by default.
 
-- **Google Search Console** (free, your own ranking data)
-- **DataForSEO** (cheap, pay-per-call keyword and SERP data)
-- **GA4** (free, traffic and conversion data)
-- **Firecrawl / Apify** (competitor page scraping)
-- **Airtable / Google Sheets** (project tracking)
+| Tool | Cost | What it adds |
+|---|---|---|
+| Google Search Console | Free | Your own ranking and click data |
+| DataForSEO | Pay-per-call | Keyword and SERP data |
+| GA4 | Free | Traffic and conversion data |
+| Firecrawl / Apify | Low cost | Competitor page scraping |
+| Airtable / Google Sheets | Free tier | Project tracking |
 
 ## n8n-ready
 
-The reporting agent's output format is designed for automated pickup. Add an n8n
-workflow later to trigger weekly reports and forward to Slack or email. See
-`docs/n8n-integration.md` for the pattern.
-
-## Related
-
-This system monitors and optimizes. For content production (keyword to publish-ready
-draft), see the companion repo: [Content Engine](https://github.com/hammer-dotcom/Content-Engine).
+The reporting agent's output format is designed for automated pickup. Add an n8n workflow later to trigger weekly reports and forward to Slack or email. See `docs/n8n-integration.md` for the pattern.
